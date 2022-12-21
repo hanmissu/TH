@@ -44,6 +44,7 @@ class MySQLConnet
         $stmt = $pdo->prepare($sql);
         $stmt->execute($data);
         $dbCon->disconnet();
+
     }
     public function getData($sql, $data = array())
     {

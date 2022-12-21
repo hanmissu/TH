@@ -57,7 +57,7 @@ class categoryModel
        
         $dbConn = new MySQLConnet();
         $sql = "select * from loaigiay WHERE maLoaiGiay=:maLoaiGiay";
-        $data = ['maLoaiGiay' => $this->getMaLoaGiay()];
+        $data = ['maLoaiGiay' => $this->maLoaiGiay];
         $cate=$dbConn->getData($sql,$data);
         $dbConn->disconnet();
         return $cate;

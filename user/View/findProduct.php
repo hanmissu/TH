@@ -14,7 +14,6 @@ include "../model/productModel.php"
 <?php include "../masterPage/menu.php" ?>
     <section id="silder" >
       
-    
     </section>
     <section class="cartegory">
 
@@ -52,48 +51,31 @@ include "../model/productModel.php"
             </div>
             <div class="cartegory-right ">
                 <div class="cartegory-right-top-item">
-                    <?php
-                     $idCategory= $_GET["idCate"];
-                    $category = new categoryModel($idCategory,"");
-                    $dataCate= $category->getData();
-                  
-                    ?>
-                    <p>Giày <?php echo $dataCate['tenLoai'] ?> Mới</p>
-                    <?php
-                    ?>
+      
                    
                 </div>
 
-                <!-- <div class="cartegory-right-top-item">
-                    <select name="" id="">
-                        <option value="">Sắp xếp</option>
-                        <option value="">Giá cao đến thấp</option>
-                        <option value="">Giá thấp đến cao</option>
-                    </select>
-                </div> -->
-                <div class="cartegory-right-content row">
+                <div >
+
                 <form class="cartegory-right-content row" action="../Controller/ProductController.php" method="POST">
                 <?php
                     $product= new productModel("","","","","","","","","");
-                    $data=$product->getAllProduct();
-                    $idCategory= $_GET["idCate"];
-                 // var_dump($data);die;
+                    $data=$product->getDataByKeyWord($_SESSION["key"]);
+                    var_dump($data);die;
                     for ($i = 0; $i < count($data); $i++) {
-                        if($data[$i]['maLoaiGiay']==$idCategory){
                             ?>
-                            <div class="cartegory-right-content-item"></a>
-                            <a href="../View/product.php?id=<?php echo $data[$i]['maGiay'] ?>">  <img src="../../img/<?php echo $data[$i]['anh'] ?>" alt="Lỗi"> </a>
-                               <a href="../View/product.php?id=<?php echo $data[$i]['maGiay'] ?>"><h1><?php echo $data[$i]['tenGiay'] ?> </h1></a>
-                            
+                            <div class="cartegory-right-content-item">
+                                <a href="../View/product.php?id=<?php echo $data[$i]['maGiay'] ?>">  <img src="../../img/<?php echo $data[$i]['anh'] ?>" alt="Lỗi"> </a>
+                                <a href="../View/product.php?id=<?php echo $data[$i]['maGiay'] ?>"><h1><?php echo $data[$i]['tenGiay'] ?> </h1></a>
+                                
                                 <p><?php echo number_format($data[$i]['gia']) ?><sup>đ</sup></p>
                             </div>
-                        <?php
-                        }
-                   
+                            <?php
                     }
                     ?> 
+                       
                 </form>
-      
+              
                 </div>
  
                 

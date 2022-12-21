@@ -9,7 +9,17 @@ class productModel
     private $size;
     private $anh;
     private $moTa;
+    private $soLuong;
     private $maLoaiGiay;
+    public function getSoLuong()
+    {
+        return $this->soLuong;
+    }
+
+    public  function setSoLuong($soLuong)
+    {
+        $this->soLuong = $soLuong;
+    }
     public function getmoTa()
     {
         return $this->moTa;
@@ -85,7 +95,7 @@ class productModel
         $this->maGiay = $maGiay;
     }
 
-    public function __construct($maGiay, $tenGiay, $gia, $mauSac, $size, $anh, $moTa, $maLoaiGiay)
+    public function __construct($maGiay, $tenGiay, $gia, $mauSac, $size, $anh, $moTa, $maLoaiGiay,$soLuong)
     {
         $this->maGiay = $maGiay;
         $this->tenGiay = $tenGiay;
@@ -95,11 +105,12 @@ class productModel
         $this->anh = $anh;
         $this->moTa = $moTa;
         $this->maLoaiGiay=$maLoaiGiay;
+        $this->soLuong=$soLuong;
     }
     public function  inssertProduct()
     {
         $data = [
-            
+            'maGiay'=>$this->maGiay,
             'tenGiay' => $this->tenGiay,
             'gia' => $this->gia,
             'mauSac' => $this->mauSac,
@@ -107,11 +118,12 @@ class productModel
             'anh' => $this->anh,
             'moTa' => $this->moTa,
             'maLoaiGiay' => $this->maLoaiGiay,
+            'soLuong' => $this->soLuong,
         ];
         $dbConnet = new MySQLConnet();
         $pdo = $dbConnet->connet();
-        $sql = "INSERT INTO giay (tenGiay,gia,mauSac,size,anh,moTa,maLoaiGiay) 
-                VALUES (:tenGiay,:gia,:mauSac,:size,:anh,:moTa,:maLoaiGiay)";
+        $sql = "INSERT INTO giay (maGiay,tenGiay,gia,mauSac,size,anh,moTa,maLoaiGiay) 
+                VALUES (:maGiay,:tenGiay,:gia,:mauSac,:size,:anh,:moTa,:maLoaiGiay)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute($data);
     }
@@ -136,6 +148,17 @@ class productModel
         return $pro;
 
     }
+    public function getDataByKeyWord($key)
+    {
+       
+        $dbConn = new MySQLConnet();
+        $sql = "select * from giay WHERE tenGiay like ':key'";
+        $data = ['key' => $key];
+        $pro=$dbConn->getData($sql,$data);
+        $dbConn->disconnet();
+        return $pro;
+
+    }
     public function deleteData()
     {
         $data = [
@@ -147,7 +170,7 @@ class productModel
         $dbConnet->disconnet();
         return $pro;
     }
-    public function updateData($maGiay,$tenGiay,$gia,$mauSac,$size,$anh,$moTa,$maLoaiGiay)
+    public function updateData($maGiay,$tenGiay,$gia,$mauSac,$size,$anh,$moTa,$maLoaiGiay,$soLuong)
     {
         $data = [
             'maGiay'=>$maGiay,
@@ -158,9 +181,10 @@ class productModel
             'anh' => $anh,
             'moTa' => $moTa,
             'maLoaiGiay' => $maLoaiGiay,
+            'soLuong'=>$soLuong,
         ];
         $dbConnet = new MySQLConnet();
-        $sql = "UPDATE giay set tenGiay=:tenGiay,gia=:gia,mauSac=:mauSac,size=:size,anh=:anh,moTa=:moTa,maLoaiGiay=:maLoaiGiay
+        $sql = "UPDATE giay set tenGiay=:tenGiay,gia=:gia,mauSac=:mauSac,size=:size,anh=:anh,moTa=:moTa,maLoaiGiay=:maLoaiGiay,soLuong=:soLuong
                  WHERE maGiay=:maGiay";
         $dbConnet->update($sql, $data);
     }

@@ -1,15 +1,15 @@
 <section class="app-container">
         <p> Tải ứng dụng Hân Cường  </p>
          <div class="app-google">
-            <img src="inmages/appstore.png">
-            <img src="inmages/googleplay.png">
+            <img src="images/appstore.png">
+            <img src="images/googleplay.png">
          </div>
          <p>Nhận bản tin Hân và Cường</p>
         
     </section>
     <!-- <footer> -->
         <div class="footer-top">
-            <li><a href=""><img src="inmages/logoSaleNoti.png" alt=""></a></li>
+            <li><a href=""><img src="images/logoSaleNoti.png" alt=""></a></li>
             <li><a href=""></a>Liên Hệ</li>
             <li><a href=""></a>Tuyển dụng</li>
             <li><a href=""></a>Giới thiệu</li>
